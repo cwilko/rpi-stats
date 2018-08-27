@@ -24,6 +24,6 @@ do
 	echo $DATA
 
 	# Publishing it to the topic
-    mosquitto_pub -h $MQTT_HOST -p $MQTT_PORT -t $MQTT_TOPIC -q 1 -m "$DATA"
+    mosquitto_pub -d -h $MQTT_HOST -p $MQTT_PORT -t $MQTT_TOPIC -q 1 -m "$DATA"
     sleep $INTERVAL_SEC
 done
