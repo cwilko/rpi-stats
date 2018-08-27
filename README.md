@@ -8,9 +8,18 @@ docker run -d \
 -e "MQTT_HOST=test.mosquitto.org" \
 -e "MQTT_PORT=1883" \
 -e "MQTT_TOPIC=/test/telemetry" \
--e "INTERVAL_SEC=10" \
+-e "INTERVAL_SEC=5" \
 mqtt-stats:1
 ```
+
+After this, the docker container will be exporting the cpu and memory usage to test.mosquitto.org on the topic 
+`/test/telemetry` every 5 seconds.  
+
+You can subscribe to that topic from any other computer:
+```bash
+mosquitto_sub -d -h test.mosquitto.org  -t "/test/telemetry"
+```
+
 
 ## Build
 ```bash
