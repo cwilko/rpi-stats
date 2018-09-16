@@ -5,11 +5,13 @@ Container to export CPU and Memory usage to a MQTT topic
 ## Running it:
 ```bash
 docker run -d --name=mqtt-stats --restart=always \
+-v /proc:/prochost:ro \
 -e "MQTT_HOST=test.mosquitto.org" \
 -e "MQTT_PORT=1883" \
 -e "MQTT_TOPIC=/test/telemetry" \
+-e "PROC_PATH=/prochost" \
 -e "INTERVAL_SEC=5" \
-asavie/mqtt-stats:1
+asavie/mqtt-stats:2
 ```
 
 After this, the docker container will be exporting the cpu and memory usage to test.mosquitto.org on the topic `/test/telemetry` every 5 seconds.  
@@ -22,5 +24,5 @@ mosquitto_sub -d -h test.mosquitto.org  -t "/test/telemetry"
 
 ## Build
 ```bash
-docker build . -t asavie/mqtt-stats:1
+docker build . -t asavie/mqtt-stats:2
 ```
