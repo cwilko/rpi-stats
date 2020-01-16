@@ -1,4 +1,5 @@
 FROM arm32v7/alpine
+COPY qemu-arm-static /usr/bin
 
 # Set the working directory to /app
 WORKDIR /app
