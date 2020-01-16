@@ -50,6 +50,7 @@ do
     # Get uptime
     UPTIME=`awk '{print $1*1000}' /proc/uptime`
 
+
     # Get temperatures
     CPU_TEMP=$(($(</sys/class/thermal/thermal_zone0/temp)/1000))
     GPU_TEMP=`vcgencmd measure_temp | sed "s/[^0-9.]//g"`
