@@ -44,7 +44,25 @@ do
     MEM_USED=`expr $MEM_TOTAL - $MEM_AVAILABLE`
     MEM_USAGE=`expr $MEM_USED \* 100 / $MEM_TOTAL`
 
-    DATA="{\"cpu\":$CPU_USAGE, \"memory\": $MEM_USAGE}"
+    # Getting Disk Usage
+    DISK_USAGE=`awk "BEGIN {print "$(df -P | awk 'NR>2 && /^\/dev\//{sum+=$3}END{print sum}')/$(df -P | awk 'NR>2 && /^\/dev\//{sum+=$2}END{print sum}')*100"}";`
+
+    # Get uptime
+    UPTIME=`awk '{print $1*1000}' /proc/uptime`
+
+    # Get temperatures
+    CPU_TEMP=$(($(</sys/class/thermal/thermal_zone0/temp)/1000))
+    GPU_TEMP=`vcgencmd measure_temp | sed "s/[^0-9.]//g"`
+    PMIC_TEMP=`vcgencmd measure_temp pmic | sed "s/[^0-9.]//g"`
+
+    DATA="{\"cpu\":$CPU_USAGE,\
+      \"memory\": $MEM_USAGE,\
+      \"disk\": $DISK_USAGE,\
+      \"uptime\": $UPTIME,\
+      \"cpu_temp\": $CPU_TEMP,\
+      \"gpu_temp\": $GPU_TEMP,\
+      \"pmic_temp\": $PMIC_TEMP,\
+      }"
 
     # Logging
     echo $DATA

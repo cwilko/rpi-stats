@@ -1,4 +1,4 @@
-FROM alpine
+FROM arm32v7/alpine
 
 # Set the working directory to /app
 WORKDIR /app
