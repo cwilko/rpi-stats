@@ -69,7 +69,7 @@ do
     echo $DATA
 
     # Publishing it to the topic
-    cmd="mosquitto_pub -d -h $MQTT_HOST -p $MQTT_PORT -t $MQTT_TOPIC $MQTT_EXTRA_ARGS -q 1 -m \"$DATA\""
+    cmd="mosquitto_pub -h $MQTT_HOST -p $MQTT_PORT -t $MQTT_TOPIC $MQTT_EXTRA_ARGS -q 1 -m \"$DATA\""
     echo $cmd
     eval $cmd
     sleep $INTERVAL_SEC
