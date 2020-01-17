@@ -52,7 +52,7 @@ do
 
 
     # Get temperatures
-    CPU_TEMP=awk "BEGIN { print "$(cat /sys/class/thermal/thermal_zone0/temp)/1000" };"
+    CPU_TEMP=`awk "BEGIN { print "$(cat /sys/class/thermal/thermal_zone0/temp)/1000" };"`
     GPU_TEMP=`vcgencmd measure_temp | sed "s/[^0-9.]//g"`
     PMIC_TEMP=`vcgencmd measure_temp pmic | sed "s/[^0-9.]//g"`
 
