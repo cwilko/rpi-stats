@@ -56,13 +56,17 @@ do
     GPU_TEMP=`vcgencmd measure_temp | sed "s/[^0-9.]//g"`
     PMIC_TEMP=`vcgencmd measure_temp pmic | sed "s/[^0-9.]//g"`
 
-    DATA="{\"cpu\":$CPU_USAGE,\
+    HOSTNAME=`hostname`
+
+    DATA="{\
+      \"host\":$HOSTNAME,\
+      \"cpu\":$CPU_USAGE,\
       \"memory\": $MEM_USAGE,\
       \"disk\": $DISK_USAGE,\
       \"uptime\": $UPTIME,\
       \"cpu_temp\": $CPU_TEMP,\
       \"gpu_temp\": $GPU_TEMP,\
-      \"pmic_temp\": $PMIC_TEMP,\
+      \"pmic_temp\": $PMIC_TEMP\
       }"
 
     # Logging
