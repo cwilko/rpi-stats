@@ -58,7 +58,7 @@ do
     PMIC_TEMP=`vcgencmd measure_temp pmic | sed "s/[^0-9.]//g"`
 
     DATA="{\
-      \"host\": $HOST_NAME,\
+      \"host\": \"$HOST_NAME\",\
       \"cpu\": $CPU_USAGE,\
       \"memory\": $MEM_USAGE,\
       \"disk\": $DISK_USAGE,\
