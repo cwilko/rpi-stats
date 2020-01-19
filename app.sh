@@ -6,6 +6,7 @@
 [  -z "$MQTT_TOPIC" ] && MQTT_TOPIC="/test/telemetry"
 [  -z "$MQTT_PORT" ] && MQTT_PORT=1883
 [  -z "$INTERVAL_SEC" ] && INTERVAL_SEC=5
+[  -z "$HOST_NAME" ] && HOST_NAME=`hostname`
 
 
 # Logging out the variables
@@ -56,10 +57,8 @@ do
     GPU_TEMP=`vcgencmd measure_temp | sed "s/[^0-9.]//g"`
     PMIC_TEMP=`vcgencmd measure_temp pmic | sed "s/[^0-9.]//g"`
 
-    HOSTNAME=`hostname`
-
     DATA="{\
-      \"host\":$HOSTNAME,\
+      \"host\":$HOST_NAME,\
       \"cpu\":$CPU_USAGE,\
       \"memory\": $MEM_USAGE,\
       \"disk\": $DISK_USAGE,\
